@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-10dp"
+        android:layout_marginRight="-5dp"
+
+        android:src="@drawable/img_mainscreen_road"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="25dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+
+            android:src="@drawable/img_mainscreen_person" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="Where are you?"
+            android:textColor="@color/primary"
+
+            android:textSize="18sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/primary_button"
+            android:text="Share Your Location"
+
+            android:textAllCaps="false"
+
+            android:textSize="15sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/primary_outline_button"
+
+            android:drawableStart="@drawable/icon_location"
+            android:drawablePadding="10dp"
+
+            android:hint="Type a location"
+
+
+            android:paddingLeft="10dp"
+            android:textAllCaps="false"
+
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+
+            android:paddingHorizontal="55dp"
+
+            android:background="@drawable/primary_button"
+
+            android:text="Search"
+            android:textAllCaps="false"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
