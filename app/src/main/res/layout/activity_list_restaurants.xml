@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListRestaurantsActivity"
+
+    android:clipToPadding="false"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+
+        android:orientation="vertical"
+        android:translationZ="1dp"
+        android:visibility="visible"
+        tools:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/home_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginHorizontal="25dp"
+
+                android:layout_marginVertical="16dp"
+                android:contentDescription="Home"
+
+                android:onClick="gotoHome"
+                android:src="@drawable/icon_home" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:clipChildren="false"
+            android:clipToPadding="false"
+
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="10dp">
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1">
+
+                <Spinner
+                    android:id="@+id/sort_rating_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:background="@drawable/primary_outline_button"
+
+                    android:elevation="8dp"
+
+/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:translationZ="8dp"
+                    android:src="@drawable/icon_arrow_swap" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_star_fill"
+                    android:translationZ="8dp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginLeft="8dp"
+
+                android:layout_weight="1">
+
+                <Spinner
+                    android:id="@+id/sort_price_spinner"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:background="@drawable/primary_outline_button"
+
+                    android:elevation="8dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:translationZ="8dp"
+                    android:src="@drawable/icon_arrow_swap" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_price_tag"
+                    android:translationZ="8dp" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/restaurants_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:padding="25dp"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
