@@ -16,9 +16,7 @@
         android:clipToPadding="false"
 
         android:orientation="vertical"
-        android:translationZ="1dp"
-        android:visibility="visible"
-        tools:visibility="visible">
+        android:translationZ="1dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -131,8 +129,8 @@
             android:id="@+id/restaurants_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            android:padding="25dp"/>
+            android:layout_marginTop="25dp"
+        />
 
 
     </LinearLayout>
