@@ -8,28 +8,35 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Switch
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.findrestaurants.api.Endpoints
+import com.example.findrestaurants.api.ServiceBuilder
+import com.example.findrestaurants.api.models.Places
 import com.example.findrestaurants.recycler.RestaurantAdapter
 import com.example.findrestaurants.recycler.dataclasses.Restaurant
+import com.google.android.gms.maps.model.LatLng
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ListRestaurantsActivity : AppCompatActivity() {
 
-    protected val restaurantsList = listOf<Restaurant>(
-        Restaurant("Mom's Kitchen Nybrogatan",45f, 5f, arrayOf(R.drawable.sample,R.drawable.sample)),
-        Restaurant("Mom's Kitchen Nybrogatan",46f, 4.6f, arrayOf(R.drawable.sample,R.drawable.sample)),
-        Restaurant("Mom's Kitchen Nybrogatan",48f, 4.2f, arrayOf(R.drawable.sample,R.drawable.sample)),
-        Restaurant("Mom's Kitchen Nybrogatan",40f, 3.6f, arrayOf(R.drawable.sample,R.drawable.sample)),
-        Restaurant("Mom's Kitchen Nybrogatan",50f, 4.7f, arrayOf(R.drawable.sample,R.drawable.sample))
-    )
+
+    private val SEARCH_RADIUS = 1500;
+    private lateinit var location: LatLng
+
+    protected var restaurantsList = mutableListOf<Restaurant>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_restaurants)
 
+        location = LatLng(intent.getDoubleExtra("latitude",0.0),
+                            intent.getDoubleExtra("longitude",0.0))
+
         loadSpinners()
-        loadRestaurantsRecyclerView(restaurantsList)
+        loadRestaurantsList()
     }
 
     fun gotoHome(v: View?){
@@ -80,6 +87,37 @@ class ListRestaurantsActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun loadRestaurantsList(){
+        val request = ServiceBuilder.buildService(Endpoints::class.java)
+        val call = request.getNearbyPlaces("${location.latitude},${location.longitude}",SEARCH_RADIUS,"restaurant",resources.getString(R.string.API_KEY))
+
+
+        call.enqueue(object : Callback<Places> {
+            override fun onResponse(
+                call: Call<Places>,
+                response: Response<Places>
+            ) {
+                if(response.isSuccessful){
+                    for(i in 0..response.body()!!.results.size-1){
+                        val currentPlace = response.body()!!.results[i]
+
+                        if(currentPlace.rating >= 4.5F){
+                            restaurantsList.add(Restaurant(currentPlace.name,currentPlace.price_level,currentPlace.rating, arrayOf(R.drawable.sample,R.drawable.sample,R.drawable.sample)))
+                        }
+
+                    }
+
+                    loadRestaurantsRecyclerView(restaurantsList)
+
+                }
+            }
+
+            override fun onFailure(call: Call<Places>, t: Throwable) {
+                Log.d("DEBUG", "${t.message}")
+            }
+        })
     }
 
     fun sortRestaurants(type: Int, direction: Int) {

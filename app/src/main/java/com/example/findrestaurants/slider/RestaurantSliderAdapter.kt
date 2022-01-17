@@ -9,9 +9,17 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.example.findrestaurants.R
+import androidx.viewpager.widget.ViewPager
+
+
+
 
 class RestaurantSliderAdapter(var context: Context, var images: Array<Int>) : PagerAdapter(){
     lateinit var layoutInflater: LayoutInflater
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        (container as ViewPager).removeView(`object` as View)
+    }
 
     override fun getCount(): Int {
         return images.size

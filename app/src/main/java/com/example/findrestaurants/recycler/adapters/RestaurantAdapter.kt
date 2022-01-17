@@ -9,12 +9,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import com.example.findrestaurants.DirectionsActivity
-import com.example.findrestaurants.ListRestaurantsActivity
+import com.example.findrestaurants.MapsActivity
 import com.example.findrestaurants.R
 import com.example.findrestaurants.recycler.dataclasses.Restaurant
 import com.example.findrestaurants.slider.RestaurantSliderAdapter
@@ -67,7 +65,7 @@ class RestaurantAdapter(
 
             slider.adapter = sliderAdapter
             directions_btn.setOnClickListener {
-                holder.itemView.context.startActivity(Intent(holder.itemView.context, DirectionsActivity::class.java))
+                holder.itemView.context.startActivity(Intent(holder.itemView.context, MapsActivity::class.java))
             }
         }
 

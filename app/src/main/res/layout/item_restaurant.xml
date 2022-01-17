@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
 
-            android:text="Mom's Kitchen Nybrogatan"
+            android:paddingRight="45dp"
+            android:text="Mom's Kitchen Nybrogatan a a a a a a a a aaaaaaa aaaaaa aaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaa"
             android:textColor="@color/primary_900"
             android:textSize="16sp" />
 
