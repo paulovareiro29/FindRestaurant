@@ -1,15 +1,20 @@
 package com.example.findrestaurants.recycler
 
+import android.content.Intent
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.example.findrestaurants.DirectionsActivity
+import com.example.findrestaurants.ListRestaurantsActivity
 import com.example.findrestaurants.R
 import com.example.findrestaurants.recycler.dataclasses.Restaurant
 import com.example.findrestaurants.slider.RestaurantSliderAdapter
@@ -29,7 +34,6 @@ class RestaurantAdapter(
 
         val sliderAdapter = RestaurantSliderAdapter(holder.itemView.context, restaurant.images)
 
-        holder.slider.adapter = sliderAdapter
 
         holder.apply {
             name.text = restaurant.name
@@ -61,6 +65,10 @@ class RestaurantAdapter(
                 }
             }
 
+            slider.adapter = sliderAdapter
+            directions_btn.setOnClickListener {
+                holder.itemView.context.startActivity(Intent(holder.itemView.context, DirectionsActivity::class.java))
+            }
         }
 
 
@@ -77,4 +85,5 @@ class RestaurantViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     val rating = itemView.findViewById<TextView>(R.id.rating)
     val stars = itemView.findViewById<LinearLayout>(R.id.stars)
     val slider = itemView.findViewById<ViewPager>(R.id.slider)
+    val directions_btn = itemView.findViewById<Button>(R.id.directions_btn)
 }
