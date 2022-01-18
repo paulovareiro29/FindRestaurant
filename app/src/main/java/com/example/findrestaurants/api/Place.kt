@@ -1,6 +1,6 @@
 package com.example.findrestaurants.api.models
 
-data class Places (
+data class PlacesClass (
 
     val results: Array<Restaurant>
 

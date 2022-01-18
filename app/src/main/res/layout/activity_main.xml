@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +41,8 @@
             android:text="Where are you?"
             android:textColor="@color/primary"
 
-            android:textSize="18sp" />
+            android:textSize="18sp"
+/>
 
         <Button
             android:id="@+id/share_loc_btn"
@@ -55,25 +58,20 @@
 
             android:onClick="shareLocation"/>
 
-        <EditText
-            android:id="@+id/input_loc"
-
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
-
-            android:layout_marginBottom="12dp"
             android:background="@drawable/primary_outline_button"
+            android:layout_marginBottom="12dp">
 
-            android:drawableStart="@drawable/icon_location"
-            android:drawablePadding="10dp"
+            <fragment android:id="@+id/autocomplete_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-            android:hint="Type a location"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                />
 
-
-            android:paddingLeft="10dp"
-            android:textAllCaps="false"
-
-            android:textSize="15sp" />
+        </RelativeLayout>
 
         <Button
             android:id="@+id/search_loc_btn"

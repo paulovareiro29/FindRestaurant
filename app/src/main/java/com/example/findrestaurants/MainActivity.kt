@@ -3,6 +3,7 @@ package com.example.findrestaurants
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -11,27 +12,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.findrestaurants.api.Endpoints
-import com.example.findrestaurants.api.ServiceBuilder
-import com.example.findrestaurants.api.models.Places
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.CancellationTokenSource
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 9999
-    lateinit var lastLocation: Location
 
+    var selectedLocation: LatLng? = null
 
     companion object {
         var mPermissionsGranted: Boolean = false
@@ -43,8 +45,43 @@ class MainActivity : AppCompatActivity() {
 
         getLocationPermissions()
         Log.d("DEBUG","TESTT")
+
+
+        Places.initialize(applicationContext,resources.getString(R.string.API_KEY))
+        Places.createClient(this)
+
+        loadAutoComplete()
     }
 
+    fun loadAutoComplete(){
+        val autocompleteFragment =
+            supportFragmentManager.findFragmentById(R.id.autocomplete_fragment)
+                    as AutocompleteSupportFragment
+
+        // Remove icon
+        autocompleteFragment.view?.findViewById<ImageView>(R.id.places_autocomplete_search_button)?.setImageDrawable(resources.getDrawable(R.drawable.icon_location))
+        val searchInput = autocompleteFragment.view?.findViewById<EditText>(R.id.places_autocomplete_search_input)
+        searchInput?.textSize = 6 * getResources().getDisplayMetrics().scaledDensity;
+
+        autocompleteFragment.setHint("Type a location")
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.NAME,Place.Field.LAT_LNG))
+
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                // TODO: Get info about the selected place.
+                Log.i("DEBUG", "Place: ${place.latLng}")
+                if(place.latLng != null){
+                    selectedLocation=LatLng(place.latLng!!.latitude,place.latLng!!.longitude)
+                }
+            }
+
+            override fun onError(status: Status) {
+                Log.i("DEBUG", "An error occurred: $status")
+            }
+        })
+    }
+
+    // On share location btn click
     @SuppressLint("MissingPermission")
     fun shareLocation(v: View?){
 
@@ -55,8 +92,7 @@ class MainActivity : AppCompatActivity() {
 
             fusedLocationClient.getCurrentLocation(LocationRequest.QUALITY_HIGH_ACCURACY,CancellationTokenSource().token).addOnSuccessListener(this) { location ->
                 if (location != null) {
-                    lastLocation = location
-
+                    selectedLocation = LatLng(location.latitude,location.longitude)
                     Toast.makeText(this,"Location loaded",Toast.LENGTH_LONG).show()
                 }
             }
@@ -64,14 +100,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    // On search btn click
     fun searchLocation(v: View?){
-        if(lastLocation != null){
+       if(selectedLocation != null){
             startActivity(Intent(applicationContext, ListRestaurantsActivity::class.java)
-                .putExtra("latitude",lastLocation.latitude)
-                .putExtra("longitude",lastLocation.longitude))
+                .putExtra("latitude",selectedLocation!!.latitude)
+                .putExtra("longitude",selectedLocation!!.longitude))
         }else{
             Toast.makeText(this,"No location loaded",Toast.LENGTH_LONG).show()
-
         }
 
     }

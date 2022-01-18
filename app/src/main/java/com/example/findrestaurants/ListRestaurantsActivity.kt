@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.findrestaurants.api.Endpoints
 import com.example.findrestaurants.api.ServiceBuilder
-import com.example.findrestaurants.api.models.Places
+import com.example.findrestaurants.api.models.PlacesClass
 import com.example.findrestaurants.recycler.RestaurantAdapter
 import com.example.findrestaurants.recycler.dataclasses.Restaurant
 import com.google.android.gms.maps.model.LatLng
@@ -94,10 +94,10 @@ class ListRestaurantsActivity : AppCompatActivity() {
         val call = request.getNearbyPlaces("${location.latitude},${location.longitude}",SEARCH_RADIUS,"restaurant",resources.getString(R.string.API_KEY))
 
 
-        call.enqueue(object : Callback<Places> {
+        call.enqueue(object : Callback<PlacesClass> {
             override fun onResponse(
-                call: Call<Places>,
-                response: Response<Places>
+                call: Call<PlacesClass>,
+                response: Response<PlacesClass>
             ) {
                 if(response.isSuccessful){
                     for(i in 0..response.body()!!.results.size-1){
@@ -114,7 +114,7 @@ class ListRestaurantsActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<Places>, t: Throwable) {
+            override fun onFailure(call: Call<PlacesClass>, t: Throwable) {
                 Log.d("DEBUG", "${t.message}")
             }
         })
