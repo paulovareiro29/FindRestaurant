@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "97988051979",
+    "project_id": "findrestaurantapp-bac53",
+    "storage_bucket": "findrestaurantapp-bac53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97988051979:android:63660b455b1040d963f30e",
+        "android_client_info": {
+          "package_name": "com.example.findrestaurants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97988051979-72gj5nqce1t2262i02va8l2lkigsr63v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0SqtzHVj3EQ7oxRASOa-KOPkv5cIgPhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97988051979-72gj5nqce1t2262i02va8l2lkigsr63v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
