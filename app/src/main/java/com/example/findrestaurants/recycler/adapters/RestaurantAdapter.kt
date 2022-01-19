@@ -65,7 +65,9 @@ class RestaurantAdapter(
 
             slider.adapter = sliderAdapter
             directions_btn.setOnClickListener {
-                holder.itemView.context.startActivity(Intent(holder.itemView.context, MapsActivity::class.java))
+                holder.itemView.context.startActivity(Intent(holder.itemView.context, MapsActivity::class.java)
+                    .putExtra("latitude",restaurant.latLng.latitude)
+                    .putExtra("longitude",restaurant.latLng.longitude))
             }
         }
 

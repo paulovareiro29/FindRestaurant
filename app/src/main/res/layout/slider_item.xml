@@ -12,7 +12,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginHorizontal="1dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center_vertical"
             app:shapeAppearanceOverlay="@style/roundedImageView"
 />
 
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginHorizontal="1dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         app:shapeAppearanceOverlay="@style/roundedImageView"
         />
     <com.google.android.material.imageview.ShapeableImageView
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginHorizontal="1dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         app:shapeAppearanceOverlay="@style/roundedImageView"
         />
 

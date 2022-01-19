@@ -103,8 +103,19 @@ class ListRestaurantsActivity : AppCompatActivity() {
                     for(i in 0..response.body()!!.results.size-1){
                         val currentPlace = response.body()!!.results[i]
 
+                        val photosArray: MutableList<String> = mutableListOf()
+                        if(currentPlace.photos != null){
+                            for (photo in currentPlace.photos){
+                                photosArray.add(photo.photo_reference)
+                            }
+                        }
+
                         if(currentPlace.rating >= 4.5F){
-                            restaurantsList.add(Restaurant(currentPlace.name,currentPlace.price_level,currentPlace.rating, arrayOf(R.drawable.sample,R.drawable.sample,R.drawable.sample)))
+                            restaurantsList.add(Restaurant(currentPlace.name,
+                                currentPlace.price_level,
+                                currentPlace.rating,
+                                LatLng(currentPlace.geometry.location.lat,currentPlace.geometry.location.lng),
+                                photosArray))
                         }
 
                     }
