@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="title_activity_maps">MapsActivity</string>
-    <string name="API_KEY">AIzaSyCfOqcfH-NgB3LQA6nFOBMqz9mbKz7ByKM</string>
+    <string name="API_KEY"></string>
 </resources>
