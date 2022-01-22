@@ -75,7 +75,8 @@ class ListRestaurantsActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                (view as TextView).text = null
+                if(view != null)
+                    (view as TextView).text = null
                 if(position != 0){
                     sortRestaurants(0,position-1)
                 }
@@ -86,7 +87,8 @@ class ListRestaurantsActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                (view as TextView).text = null
+                if(view != null)
+                    (view as TextView).text = null
                 if(position != 0){
                     sortRestaurants(1,position-1)
                 }
