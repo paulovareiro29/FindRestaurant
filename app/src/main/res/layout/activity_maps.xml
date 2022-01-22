@@ -94,8 +94,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/direction_mode_buttons"
-                    android:onClick="changeToWalking">
+                    android:background="@drawable/direction_mode_buttons">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -118,44 +117,6 @@
                             android:layout_height="wrap_content"
                             android:text="5 min"
                             android:textColor="@color/primary_900"
-                            android:layout_gravity="center"/>
-                    </LinearLayout>
-
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/direction_driving_container"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/direction_mode_buttons"
-                    android:backgroundTint="@color/primary"
-
-                    android:onClick="changeToDriving">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_centerInParent="true">
-
-                        <ImageView
-                            android:id="@+id/direction_driving_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_driving_active"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="10dp"
-                            />
-
-                        <TextView
-                            android:id="@+id/direction_driving_time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="5 min"
-                            android:textColor="@color/white"
                             android:layout_gravity="center"/>
                     </LinearLayout>
 

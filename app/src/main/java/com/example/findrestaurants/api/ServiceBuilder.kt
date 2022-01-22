@@ -8,7 +8,7 @@ object ServiceBuilder {
     private val client = OkHttpClient.Builder().build()
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://maps.googleapis.com/maps/api/place/nearbysearch/")
+        .baseUrl("https://maps.googleapis.com/maps/api/place/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()

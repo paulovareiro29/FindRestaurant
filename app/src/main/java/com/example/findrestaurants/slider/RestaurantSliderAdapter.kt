@@ -45,6 +45,9 @@ class RestaurantSliderAdapter(var context: Context, var images: MutableList<Stri
                     Glide.with(context).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400"+
                             "&photo_reference=${images[ 3*position + i]}" +
                             "&key=${context.resources.getString(R.string.API_KEY)}").into(imageView);
+                    if (view.getParent() != null) {
+                        (view.getParent() as ViewGroup).removeView(view) // <- fix
+                    }
                     container.addView(view)
                 }
 

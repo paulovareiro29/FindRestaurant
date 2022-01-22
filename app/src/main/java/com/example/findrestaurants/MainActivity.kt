@@ -83,7 +83,6 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     fun shareLocation(v: View?){
 
-
         if(mPermissionsGranted){
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(applicationContext)
 
@@ -91,7 +90,7 @@ class MainActivity : AppCompatActivity() {
             fusedLocationClient.getCurrentLocation(LocationRequest.QUALITY_HIGH_ACCURACY,CancellationTokenSource().token).addOnSuccessListener(this) { location ->
                 if (location != null) {
                     selectedLocation = LatLng(location.latitude,location.longitude)
-                    Toast.makeText(this,"Location loaded",Toast.LENGTH_LONG).show()
+                    searchLocation(v)
                 }
             }
         }
