@@ -10,9 +10,11 @@
         <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/drawable/shadow.xml" value="0.2703125" />
         <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/drawable/solid_view.xml" value="0.2703125" />
         <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/layout/activity_directions.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/layout/activity_image_slider.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/layout/activity_list_restaurants.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/layout/activity_main.xml" value="0.536" />
         <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/layout/activity_maps.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/layout/image_slider_item.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/layout/item_restaurant.xml" value="0.6" />
         <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/layout/rounded_corners.xml" value="0.13020833333333334" />
         <entry key="..\:/AndroidStudioProjects/FindRestaurants/app/src/main/res/layout/rv_item_restaurant.xml" value="0.536" />

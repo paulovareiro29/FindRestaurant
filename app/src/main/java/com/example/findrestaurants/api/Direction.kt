@@ -5,7 +5,16 @@ data class Direction (
 )
 
 data class Route (
-    val overview_polyline: Line
+    val overview_polyline: Line,
+    val legs: Array<Leg>
+)
+
+data class Leg (
+    val duration: LegDuration
+)
+
+data class LegDuration (
+    val text: String
 )
 
 data class Line (

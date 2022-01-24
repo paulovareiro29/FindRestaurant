@@ -1,6 +1,7 @@
 package com.example.findrestaurants.recycler
 
 import android.content.Intent
+import android.net.Uri
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -16,6 +18,10 @@ import com.example.findrestaurants.MapsActivity
 import com.example.findrestaurants.R
 import com.example.findrestaurants.recycler.dataclasses.Restaurant
 import com.example.findrestaurants.slider.RestaurantSliderAdapter
+import androidx.core.content.ContextCompat.startActivity
+
+
+
 
 class RestaurantAdapter(
     var restaurants: List<Restaurant>
@@ -35,8 +41,40 @@ class RestaurantAdapter(
 
         holder.apply {
             name.text = restaurant.name
-            price.text = restaurant.price.toString()
+
+            var link: String? = ""
+            if(restaurant.website != null){
+                link = restaurant.website
+            }else if(restaurant.url != null){
+                link = restaurant.url
+            }else{
+                link = null
+            }
+
+            if(link != null){
+                name.setOnClickListener(View.OnClickListener {
+                    val i2 = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse(link)
+                    )
+                    startActivity(
+                        holder.itemView.context,
+                        i2,null
+                    )
+                })
+            }
+
+
+
             rating.text = restaurant.rating.toString()
+
+            var priceText = ""
+            for(i in 0..restaurant.price){
+                priceText += "$"
+            }
+
+            price.text = priceText
+
 
             if(stars.isEmpty()){
                 // Value from DP to PX

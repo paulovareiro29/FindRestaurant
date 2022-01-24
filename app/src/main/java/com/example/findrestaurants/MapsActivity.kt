@@ -44,7 +44,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var lastLocation: Location
     private lateinit var restaurantLocation: LatLng
 
-    private var directionsMode: String = "driving"
+    private var directionsMode: String = "walking"
     private lateinit var polylinePoints: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,6 +134,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         call.enqueue(object : Callback<Direction> {
             override fun onResponse(call: Call<Direction>, response: Response<Direction>){
                 if(response.isSuccessful){
+                    val duration = response.body()!!.routes[0].legs[0].duration
+                    findViewById<TextView>(R.id.direction_walking_time).text = duration.text
                     polylinePoints = response.body()!!.routes[0].overview_polyline.points
                     mMap.clear()
                     showInfo()
@@ -164,33 +166,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         initMap()
     }
 
-    fun changeToWalking(v: View?){
-        directionsMode = "walking"
-
-        findViewById<RelativeLayout>(R.id.direction_driving_container).background.setTint(resources.getColor(R.color.white))
-        findViewById<ImageView>(R.id.direction_driving_icon).setImageResource(R.drawable.icon_driving_inactive)
-        findViewById<TextView>(R.id.direction_driving_time).setTextColor(resources.getColor(R.color.primary_900))
-
-        findViewById<RelativeLayout>(R.id.direction_walking_container).background.setTint(resources.getColor(R.color.primary))
-        findViewById<ImageView>(R.id.direction_walking_icon).setImageResource(R.drawable.icon_walk_active)
-        findViewById<TextView>(R.id.direction_walking_time).setTextColor(resources.getColor(R.color.white))
-
-        fetchDirection()
-    }
-
-    fun changeToDriving(v: View?){
-        directionsMode = "driving"
-
-        findViewById<RelativeLayout>(R.id.direction_walking_container).background.setTint(resources.getColor(R.color.white))
-        findViewById<ImageView>(R.id.direction_walking_icon).setImageResource(R.drawable.icon_walk_inactive)
-        findViewById<TextView>(R.id.direction_walking_time).setTextColor(resources.getColor(R.color.primary_900))
-
-        findViewById<RelativeLayout>(R.id.direction_driving_container).background.setTint(resources.getColor(R.color.primary))
-        findViewById<ImageView>(R.id.direction_driving_icon).setImageResource(R.drawable.icon_driving_active)
-        findViewById<TextView>(R.id.direction_driving_time).setTextColor(resources.getColor(R.color.white))
-
-
-        fetchDirection()
-    }
 
 }
