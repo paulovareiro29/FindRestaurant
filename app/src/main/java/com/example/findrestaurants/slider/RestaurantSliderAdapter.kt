@@ -34,11 +34,6 @@ class RestaurantSliderAdapter(var context: Context, var images: MutableList<Stri
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = layoutInflater.inflate(R.layout.slider_item, container, false)
 
-        for(s in images){
-            Log.d("DEBUG", s)
-        }
-
-
         if(images.size != 0){
             for (i in 0..2){
 
@@ -47,7 +42,6 @@ class RestaurantSliderAdapter(var context: Context, var images: MutableList<Stri
                     imageView.setOnClickListener(View.OnClickListener {
                         startActivity(container.context,Intent(container.context,ImageSliderActivity::class.java).putExtra("images",images.toTypedArray()),null)
                     })
-                    Log.d("DEBUG", "size: ${images.size}, pos: ${3*position + i}")
                     Glide.with(context).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400"+
                             "&photo_reference=${images[ 3*position + i]}" +
                             "&key=${context.resources.getString(R.string.API_KEY)}").into(imageView);

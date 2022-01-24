@@ -4,9 +4,9 @@ import android.location.Location
 import com.google.maps.android.data.Geometry
 
 data class PlacesClass (
-
-    val results: Array<Restaurant>
-
+    val next_page_token: String,
+    val results: Array<Restaurant>,
+    val status: String,
 )
 
 data class Restaurant(

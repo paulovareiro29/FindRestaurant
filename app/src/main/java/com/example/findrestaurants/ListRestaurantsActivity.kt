@@ -26,7 +26,7 @@ import java.net.IDN
 class ListRestaurantsActivity : AppCompatActivity() {
 
 
-    private val SEARCH_RADIUS = 1500;
+    private val SEARCH_RADIUS = 50000;
     private lateinit var location: LatLng
 
     protected var restaurantsList = mutableListOf<Restaurant>()
@@ -39,7 +39,7 @@ class ListRestaurantsActivity : AppCompatActivity() {
                             intent.getDoubleExtra("longitude",0.0))
 
         loadSpinners()
-        loadRestaurantsList()
+        loadRestaurantsList(null)
     }
 
     fun gotoHome(v: View?){
@@ -124,7 +124,6 @@ class ListRestaurantsActivity : AppCompatActivity() {
                    ))
 
                    sortRestaurants(0,0)
-                   loadRestaurantsRecyclerView(restaurantsList)
                }
             }
 
@@ -134,12 +133,19 @@ class ListRestaurantsActivity : AppCompatActivity() {
         })
     }
 
-    fun loadRestaurantsList(){
+    fun loadRestaurantsList(nextPageToken: String?){
+
         val request = ServiceBuilder.buildService(Endpoints::class.java)
-        val call = request.getNearbyPlaces("${location.latitude},${location.longitude}",SEARCH_RADIUS,"restaurant",resources.getString(R.string.API_KEY))
+        var call: Call<PlacesClass>? = null
+        if(nextPageToken != null){
+            call = request.getNearbyPlaces(resources.getString(R.string.API_KEY),""+ nextPageToken)
+        }else{
+            call = request.getNearbyPlaces("${location.latitude},${location.longitude}",SEARCH_RADIUS,"restaurant",resources.getString(R.string.API_KEY))
+
+        }
 
 
-        call.enqueue(object : Callback<PlacesClass> {
+        call!!.enqueue(object : Callback<PlacesClass> {
             override fun onResponse(
                 call: Call<PlacesClass>,
                 response: Response<PlacesClass>
@@ -151,6 +157,20 @@ class ListRestaurantsActivity : AppCompatActivity() {
                         if(currentPlace.rating >= 4.5F){
                            getPlaceDetails(currentPlace.place_id)
                         }
+                    }
+
+                    val nextToken = response.body()!!.next_page_token
+                    Log.d("DEBUG","________________")
+
+                    Log.d("DEBUG", "status" +response.body()!!.status)
+                    Log.d("DEBUG","current_token:" + nextPageToken)
+                    Log.d("DEBUG","next_token:" + response.body()!!.next_page_token)
+
+                    Thread.sleep(1500)
+                    if(response.body()!!.status == "INVALID_REQUEST" && nextPageToken != null){
+                        loadRestaurantsList(nextPageToken)
+                    }else if(response.body()!!.status == "OK" && nextToken != null){
+                        loadRestaurantsList(nextToken)
                     }
 
                 }
@@ -171,7 +191,6 @@ class ListRestaurantsActivity : AppCompatActivity() {
         *   0: high to low
         *   1: low to high
         * */
-        Log.d("DEBUG",""+direction)
         var temporaryList = listOf<Restaurant>()
         if(type == 0){
             if(direction == 1){
